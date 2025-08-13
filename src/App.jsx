@@ -22,20 +22,20 @@ function App() {
   const notificationRef = useRef(null)
 
   const sounds = {
-    fireplace: '/sounds/fireplace.mp3',
-    rain: '/sounds/rain.mp3',
-    ocean: '/sounds/ocean.mp3'
+    fireplace: './sounds/fireplace.mp3',
+    rain: './sounds/rain.mp3',
+    ocean: './sounds/ocean.mp3'
   }
 
   const notificationSounds = {
-    focusComplete: '/sounds/focus-complete.mp3',
-    breakComplete: '/sounds/break-complete.mp3'
+    focusComplete: './sounds/focus-complete.mp3',
+    breakComplete: './sounds/break-complete.mp3'
   }
 
   const soundIcons = {
-    fireplace: '/icons/fireplace.svg',
-    rain: '/icons/rain.svg',
-    ocean: '/icons/ocean.svg'
+    fireplace: './icons/fireplace.svg',
+    rain: './icons/rain.svg',
+    ocean: './icons/ocean.svg'
   }
 
   useEffect(() => {
