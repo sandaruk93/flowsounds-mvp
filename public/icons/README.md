@@ -1,41 +1,56 @@
-# FlowSounds Icons
+# Icon Files Directory
 
-This directory contains SVG icons for the FlowSounds ambient sound options.
+This directory contains all SVG icon files for the FlowSounds MVP application.
 
 ## Current Icons
 
-- **fireplace.svg** - Fireplace/wood burning icon
-- **rain.svg** - Rain cloud with raindrops icon  
-- **ocean.svg** - Ocean waves icon
+### **Focus Sound Icons**
+- `white-noise.svg` - Icon for white noise focus sound
+- `brown-noise.svg` - Icon for brown noise focus sound
+- `pink-noise.svg` - Icon for pink noise focus sound
+
+### **Relax Sound Icons**
+- `fireplace.svg` - Icon for fireplace relax sound
+- `rain.svg` - Icon for rain relax sound
+- `ocean.svg` - Icon for ocean relax sound
 
 ## Icon Specifications
 
-- **Format**: SVG (Scalable Vector Graphics)
-- **ViewBox**: 24x24 pixels
-- **Style**: Line-based icons with `stroke="currentColor"`
-- **Fallback**: Emoji fallbacks (🔥, 🌧️, 🌊) if SVG fails to load
+- **Format:** SVG (scalable vector graphics)
+- **Size:** 24x24 pixels (viewBox)
+- **Color:** Uses `currentColor` for theme compatibility
+- **Style:** Minimal, clean design
+- **Accessibility:** Includes alt text in the application
 
-## Adding New Icons
+## Icon Usage
 
-1. Create a new SVG file in this directory
-2. Follow the naming convention: `soundname.svg`
-3. Use the same viewBox (24x24) and styling
-4. Update the `soundIcons` object in `src/App.jsx`
-5. Add a fallback emoji in the component
+The icons are used in the sound selection buttons to provide visual representation of each sound type:
 
-## Usage in Code
+- **Focus Audio Section:** Shows focus sound icons (white, brown, pink noise)
+- **Relax Audio Section:** Shows relax sound icons (fireplace, rain, ocean)
 
-```javascript
-const soundIcons = {
-  fireplace: '/icons/fireplace.svg',
-  rain: '/icons/rain.svg', 
-  ocean: '/icons/ocean.svg'
-}
-```
+## Fallback Icons
 
-## Styling
+If SVG icons fail to load, the application displays emoji fallbacks:
+- **White Noise:** ⚪
+- **Brown Noise:** 🟤
+- **Pink Noise:** 🩷
+- **Fireplace:** 🔥
+- **Rain:** 🌧️
+- **Ocean:** 🌊
 
-Icons are styled with CSS filters to match the app's color scheme:
-- **Inactive**: Gray color
-- **Active**: White color (when sound is selected)
-- **Hover**: Blue accent color
+## Customization
+
+To add new icons:
+1. Create SVG file with 24x24 viewBox
+2. Use `currentColor` for fill/stroke
+3. Add to appropriate sound object in App.jsx
+4. Add fallback emoji
+5. Update this README
+
+## Design Guidelines
+
+- Keep icons simple and recognizable
+- Use consistent stroke width
+- Ensure good contrast in both light and dark themes
+- Test at different sizes for clarity

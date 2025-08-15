@@ -3,7 +3,8 @@ import './App.css'
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
-  const [currentSound, setCurrentSound] = useState('fireplace')
+  const [currentFocusSound, setCurrentFocusSound] = useState('white-noise')
+  const [currentRelaxSound, setCurrentRelaxSound] = useState('fireplace')
   const [timeLeft, setTimeLeft] = useState(25 * 60) // 25 minutes in seconds
   const [isBreak, setIsBreak] = useState(false)
   const [focusTime, setFocusTime] = useState(25)
@@ -21,7 +22,13 @@ function App() {
   const intervalRef = useRef(null)
   const notificationRef = useRef(null)
 
-  const sounds = {
+  const focusSounds = {
+    'white-noise': './sounds/white-noise.mp3',
+    'brown-noise': './sounds/brown-noise.mp3',
+    'pink-noise': './sounds/pink-noise.mp3'
+  }
+
+  const relaxSounds = {
     fireplace: './sounds/fireplace.mp3',
     rain: './sounds/rain.mp3',
     ocean: './sounds/ocean.mp3'
@@ -32,7 +39,13 @@ function App() {
     breakComplete: './sounds/break-complete.mp3'
   }
 
-  const soundIcons = {
+  const focusSoundIcons = {
+    'white-noise': './icons/white-noise.svg',
+    'brown-noise': './icons/brown-noise.svg',
+    'pink-noise': './icons/pink-noise.svg'
+  }
+
+  const relaxSoundIcons = {
     fireplace: './icons/fireplace.svg',
     rain: './icons/rain.svg',
     ocean: './icons/ocean.svg'
@@ -40,12 +53,15 @@ function App() {
 
   useEffect(() => {
     if (isPlaying && audioRef.current) {
+      const currentSound = isBreak ? currentRelaxSound : currentFocusSound
+      const soundSource = isBreak ? relaxSounds[currentRelaxSound] : focusSounds[currentFocusSound]
+      audioRef.current.src = soundSource
       audioRef.current.play()
     } else if (!isPlaying && audioRef.current) {
       audioRef.current.pause()
       audioRef.current.currentTime = 0
     }
-  }, [isPlaying, currentSound])
+  }, [isPlaying, isBreak, currentFocusSound, currentRelaxSound])
 
   useEffect(() => {
     if (isTimerRunning && !isPaused) {
@@ -120,9 +136,18 @@ function App() {
     setTimeLeft(focusTime * 60)
   }
 
-  const handleSoundChange = (sound) => {
-    setCurrentSound(sound)
-    if (isPlaying) {
+  const handleFocusSoundChange = (sound) => {
+    setCurrentFocusSound(sound)
+    if (isPlaying && !isBreak) {
+      // Restart audio with new sound
+      setIsPlaying(false)
+      setTimeout(() => setIsPlaying(true), 100)
+    }
+  }
+
+  const handleRelaxSoundChange = (sound) => {
+    setCurrentRelaxSound(sound)
+    if (isPlaying && isBreak) {
       // Restart audio with new sound
       setIsPlaying(false)
       setTimeout(() => setIsPlaying(true), 100)
@@ -179,19 +204,48 @@ function App() {
           </div>
         </div>
 
-        {/* Sound Selection */}
+        {/* Focus Sound Selection */}
         <div className="sound-section">
-          <h3>Choose Your Sound</h3>
+          <h3>Focus Audio</h3>
           <div className="sound-buttons">
-            {Object.keys(sounds).map((sound) => (
+            {Object.keys(focusSounds).map((sound) => (
               <button
                 key={sound}
-                className={`sound-btn ${currentSound === sound ? 'active' : ''}`}
-                onClick={() => handleSoundChange(sound)}
+                className={`sound-btn ${currentFocusSound === sound ? 'active' : ''}`}
+                onClick={() => handleFocusSoundChange(sound)}
               >
                 <div className="sound-icon">
                   <img 
-                    src={soundIcons[sound]} 
+                    src={focusSoundIcons[sound]} 
+                    alt={`${sound} icon`}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextSibling.style.display = 'block';
+                    }}
+                  />
+                  <span className="fallback-icon" style={{display: 'none'}}>
+                    {sound === 'white-noise' ? '⚪' : sound === 'brown-noise' ? '🟤' : '🩷'}
+                  </span>
+                </div>
+                <span className="sound-label">{sound.replace('-', ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Relax Sound Selection */}
+        <div className="sound-section">
+          <h3>Relax Audio</h3>
+          <div className="sound-buttons">
+            {Object.keys(relaxSounds).map((sound) => (
+              <button
+                key={sound}
+                className={`sound-btn ${currentRelaxSound === sound ? 'active' : ''}`}
+                onClick={() => handleRelaxSoundChange(sound)}
+              >
+                <div className="sound-icon">
+                  <img 
+                    src={relaxSoundIcons[sound]} 
                     alt={`${sound} icon`}
                     onError={(e) => {
                       e.target.style.display = 'none';
