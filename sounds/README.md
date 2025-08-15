@@ -2,50 +2,77 @@
 
 This directory contains all audio files for the FlowSounds MVP application.
 
-## Current Ambient Sounds
+## Current Audio Structure
 
+### **Focus Sounds** (for focus sessions)
+- `white-noise.mp3` - Clean white noise for concentration
+- `brown-noise.mp3` - Deep brown noise for deep focus
+- `pink-noise.mp3` - Balanced pink noise for productivity
+
+### **Relax Sounds** (for break sessions)
 - `fireplace.mp3` - Fireplace crackling ambient sound
 - `rain.mp3` - Rain falling ambient sound  
 - `ocean.mp3` - Ocean waves ambient sound
 
-## Notification Sounds (Required)
+### **Notification Sounds**
+- `focus-complete.mp3` - Plays when focus timer completes
+- `break-complete.mp3` - Plays when break timer completes
 
-Please add these two notification sound files to this directory:
+## Adding Focus Sound Files
 
-### 1. Focus Complete Notification
-**File:** `focus-complete.mp3`
-**Purpose:** Plays when the focus timer completes
-**Recommended:** A gentle, encouraging sound (e.g., soft bell, chime, or notification tone)
-**Duration:** 2-3 seconds
+Please add these three focus sound files to this directory:
 
-### 2. Break Complete Notification  
-**File:** `break-complete.mp3`
-**Purpose:** Plays when the break timer completes
-**Recommended:** A different sound to distinguish from focus completion (e.g., different bell tone, gentle alert)
-**Duration:** 2-3 seconds
+### 1. White Noise
+**File:** `white-noise.mp3`
+**Purpose:** Clean, consistent noise for concentration
+**Recommended:** Pure white noise, 2-3 minutes loopable
+**Duration:** 2-3 minutes (loopable)
+
+### 2. Brown Noise  
+**File:** `brown-noise.mp3`
+**Purpose:** Deep, low-frequency noise for deep focus
+**Recommended:** Deep brown noise, 2-3 minutes loopable
+**Duration:** 2-3 minutes (loopable)
+
+### 3. Pink Noise
+**File:** `pink-noise.mp3`
+**Purpose:** Balanced noise spectrum for productivity
+**Recommended:** Balanced pink noise, 2-3 minutes loopable
+**Duration:** 2-3 minutes (loopable)
 
 ## File Requirements
 
 - **Format:** MP3 (recommended for best browser compatibility)
 - **Quality:** 128kbps or higher
-- **Size:** Keep under 500KB each for fast loading
+- **Size:** Keep under 2MB each for fast loading
 - **Volume:** Normalized to comfortable listening level
+- **Looping:** Seamless looping for continuous playback
 
 ## Usage
 
 The application will automatically:
-1. Play `focus-complete.mp3` when focus time ends
-2. Play `break-complete.mp3` when break time ends
-3. Automatically switch between focus and break timers
-4. Continue the timer cycle until manually stopped
+1. Play **focus sounds** during focus sessions
+2. Play **relax sounds** during break sessions
+3. Switch between sounds automatically when timer changes
+4. Play notification sounds when timers complete
+
+## Free Sound Resources
+
+For focus sounds (white, brown, pink noise):
+- **Online generators:** Many websites generate these noises
+- **Freesound.org:** Search for "white noise", "brown noise", "pink noise"
+- **Audio software:** Generate using Audacity or similar tools
+
+For relax sounds:
+- **Freesound.org**
+- **Pixabay.com** (free section)
+- **Zapsplat.com** (free tier)
 
 ## Testing
 
-After adding the notification files:
+After adding the focus sound files:
 1. Start a focus timer
-2. Wait for it to complete (or temporarily set a short time like 1 minute)
-3. Verify the focus completion sound plays
-4. Verify the timer automatically switches to break mode
-5. Wait for break to complete
-6. Verify the break completion sound plays
-7. Verify the timer automatically switches back to focus mode
+2. Verify focus sounds play during focus sessions
+3. Verify relax sounds play during break sessions
+4. Test sound switching when timers change
+5. Verify notification sounds work correctly
